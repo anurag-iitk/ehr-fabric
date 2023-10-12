@@ -10,7 +10,8 @@
    
 ```curl https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/bootstrap.sh | bash -s -- 2.5.4 2.5.4 -d -s```
 
-4. Go to this folder 
+4. Go to this folder
+   
 ```ls```
 ``` 
 bin

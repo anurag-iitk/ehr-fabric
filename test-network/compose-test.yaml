@@ -37,7 +37,7 @@ services:
       - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
       - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
       - ORDERER_METRICS_PROVIDER=prometheus
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: orderer
 
   peer-base:
@@ -84,7 +84,7 @@ services:
   
   cli:
     container_name: cli
-    image: hyperledger/fabric-tools:latest
+    image: hyperledger/fabric-tools
     labels:
       service: hyperledger-fabric
     tty: true
@@ -97,7 +97,6 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:
-      - ../crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto-config
-      - ../scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto
     networks:
       - test

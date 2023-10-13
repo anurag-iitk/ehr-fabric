@@ -37,7 +37,7 @@ services:
       - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
       - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
       - ORDERER_METRICS_PROVIDER=prometheus
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    working_dir: /root
     command: orderer
 
   peer-base:
@@ -60,7 +60,7 @@ services:
       # - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
       # - CORE_METRICS_PROVIDER=prometheus
       # - CORE_CHAINCODE_EXECUTETIMEOUT=300s
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    working_dir: /root
     command: peer node start
   
   
@@ -94,7 +94,7 @@ services:
       - FABRIC_LOGGING_SPEC=INFO
       - FABRIC_CFG_PATH=/etc/hyperledger/peercfg
       #- FABRIC_LOGGING_SPEC=DEBUG
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    working_dir: /root
     command: /bin/bash
     volumes:
       - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto

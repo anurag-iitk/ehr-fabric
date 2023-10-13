@@ -5,7 +5,6 @@ ORDERER_CA=/opt/src/github.com/hyperledger/ehr-fabric/network/crypto-config/orde
 
 docker-compose -f docker-compose.yaml  up -d 2>&1
 docker-compose -f docker-compose.yaml up -d
-sleep 5
 docker ps -a
 
 export PATH=$GOPATH/src/github.com/hyperledger/ehr-fabric/bin:${PWD}/../bin:${PWD}:$PATH
@@ -33,14 +32,16 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
+sleep 2
+
 
 ./ccp-generate.sh
 
 
 echo "################################# CHANNEL ONE #######################################"
-sleep 5
+sleep 3
 echo "=============== Generating Genesis block ==================="
-
+sleep 2
 generate genesis block for orderer
 configtxgen -profile FourOrgsOrdererGenesis -channelID $SYS_FIRST_CHANNEL -outputBlock ./channel-artifacts/genesis.block
 if [ "$?" -ne 0 ]; then
@@ -49,6 +50,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 echo "=================== Generating channel configuration transaction ========================="
+sleep 2
 set -x
 configtxgen -profile FourOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $FIRST_CHANNEL_NAME
 if [ "$?" -ne 0 ]; then
@@ -57,6 +59,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 echo "======================== Generating anchor peer update for Org1MSP ================================="
+sleep 2
 set -x
 configtxgen -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $FIRST_CHANNEL_NAME -asOrg Org1MSP
 
@@ -66,6 +69,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 echo "======================== Generating anchor peer update for Org2MSP ================================="
+sleep 2
 set -x
 configtxgen -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $FIRST_CHANNEL_NAME -asOrg Org2MSP
 
@@ -75,6 +79,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 echo "======================== Generating anchor peer update for Org3MSP ================================="
+sleep 2
 set -x
 configtxgen -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org3MSPanchors.tx -channelID $FIRST_CHANNEL_NAME -asOrg Org3MSP
 
@@ -84,6 +89,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 echo "======================== Generating anchor peer update for Org4MSP ================================="
+sleep 2
 set -x
 configtxgen -profile FourOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org4MSPanchors.tx -channelID $FIRST_CHANNEL_NAME -asOrg Org4MSP
 
@@ -101,11 +107,12 @@ fi
 
 
 
-echo "################################# CHANNEL TWO #######################################"
-sleep 5
+echo "################################# SECOND CHANNEL #######################################"
+sleep 3
 
 
-echo "=============== Generating Genesis block ==================="
+echo "=============== Generating Second channel Genesis block ==================="
+sleep 2
 
 generate genesis block for orderer
 configtxgen -profile TwoOrgsOrdererGenesis -channelID $SYS_SECOND_CHANNEL -outputBlock ./channel-artifacts-2/genesis.block
@@ -114,7 +121,8 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-echo "=================== Generating channel configuration transaction ========================="
+echo "=================== Generating Second channel configuration transaction ========================="
+sleep 2
 set -x
 configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts-2/channel.tx -channelID $SECOND_CHANNEL_NAME
 if [ "$?" -ne 0 ]; then
@@ -122,7 +130,8 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-echo "======================== Generating anchor peer update for Org1MSP ================================="
+echo "======================== Generating Second channel anchor peer update for Org1MSP ================================="
+sleep 2
 set -x
 configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts-2/Org1MSPanchors.tx -channelID $SECOND_CHANNEL_NAME -asOrg Org1MSP
 
@@ -131,7 +140,8 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-echo "======================== Generating anchor peer update for Org2MSP ================================="
+echo "======================== Generating Second channel anchor peer update for Org2MSP ================================="
+sleep 2
 set -x
 configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts-2/Org2MSPanchors.tx -channelID $SECOND_CHANNEL_NAME -asOrg Org2MSP
 
@@ -145,7 +155,8 @@ echo "################################# CHANNEL THIRD ##########################
 sleep 5
 
 
-echo "=============== Generating Genesis block ==================="
+echo "=============== Generating Third channel Genesis block ==================="
+sleep 2
 
 generate genesis block for orderer
 configtxgen -profile TwoOrgOrdererGenesis -channelID $SYS_THIRD_CHANNEL -outputBlock ./channel-artifacts-3/genesis.block
@@ -154,7 +165,8 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-echo "=================== Generating channel configuration transaction ========================="
+echo "=================== Generating Third channel configuration transaction ========================="
+sleep 2
 set -x
 configtxgen -profile TwoOrgChannel -outputCreateChannelTx ./channel-artifacts-3/channel.tx -channelID $THIRD_CHANNEL_NAME
 if [ "$?" -ne 0 ]; then
@@ -162,7 +174,8 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-echo "======================== Generating anchor peer update for Org2MSP ================================="
+echo "======================== Generating Third channel anchor peer update for Org2MSP ================================="
+sleep 2
 set -x
 configtxgen -profile TwoOrgChannel -outputAnchorPeersUpdate ./channel-artifacts-3/Org2MSPanchors.tx -channelID $THIRD_CHANNEL_NAME -asOrg Org2MSP
 
@@ -171,7 +184,8 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-echo "======================== Generating anchor peer update for Org4MSP ================================="
+echo "======================== Generating Third channel anchor peer update for Org4MSP ================================="
+sleep 2
 set -x
 configtxgen -profile TwoOrgChannel -outputAnchorPeersUpdate ./channel-artifacts-3/Org4MSPanchors.tx -channelID $SECOND_CHANNEL_NAME -asOrg Org4MSP
 

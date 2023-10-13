@@ -62,7 +62,7 @@ echo "$(yaml_ccp $ORG $P1PORT $CAPORT $PEERPEM $CAPEM)" > crypto-config/peerOrga
 
 ORG=2
 P0PORT=9051
-P0PORT=10051
+P1PORT=10051
 CAPORT=8054
 PEERPEM=crypto-config/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
 CAPEM=crypto-config/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem
@@ -74,7 +74,7 @@ echo "$(yaml_ccp $ORG $P1PORT $CAPORT $PEERPEM $CAPEM)" > crypto-config/peerOrga
 
 ORG=3
 P0PORT=11051
-P0PORT=12051
+P1PORT=12051
 CAPORT=9054
 PEERPEM=crypto-config/peerOrganizations/org3.example.com/tlsca/tlsca.org3.example.com-cert.pem
 CAPEM=crypto-config/peerOrganizations/org3.example.com/ca/ca.org3.example.com-cert.pem
@@ -86,7 +86,7 @@ echo "$(yaml_ccp $ORG $P1PORT $CAPORT $PEERPEM $CAPEM)" > crypto-config/peerOrga
 
 ORG=4
 P0PORT=13051
-P0PORT=14051
+P1PORT=14051
 CAPORT=10054
 PEERPEM=crypto-config/peerOrganizations/org4.example.com/tlsca/tlsca.org4.example.com-cert.pem
 CAPEM=crypto-config/peerOrganizations/org4.example.com/ca/ca.org4.example.com-cert.pem
